@@ -78,8 +78,6 @@ class KNearestNeighbor(object):
         #####################################################################
         #                       END OF YOUR CODE                            #
         #####################################################################
-        
-      print(dists[i])
     return dists
 
   def compute_distances_one_loop(self, X):
@@ -98,7 +96,7 @@ class KNearestNeighbor(object):
       # Compute the l2 distance between the ith test point and all training #
       # points, and store the result in dists[i, :].                        #
       #######################################################################
-      pass
+      dists[i] = np.sqrt(np.sum(np.square(self.X_train-X[i]), axis=1))
       #######################################################################
       #                         END OF YOUR CODE                            #
       #######################################################################
@@ -126,7 +124,10 @@ class KNearestNeighbor(object):
     # HINT: Try to formulate the l2 distance using matrix multiplication    #
     #       and two broadcast sums.                                         #
     #########################################################################
-    pass
+    a = -2*np.dot(X, self.X_train.T)
+    b = np.tile(np.sum(np.square(X),axis=1).reshape(num_test,1),num_train) 
+    c = np.tile(np.sum(np.square(self.X_train),axis=1).reshape(num_train,1),num_test).T
+    dists = np.sqrt(a + b + c)
     #########################################################################
     #                         END OF YOUR CODE                              #
     #########################################################################
