@@ -1,3 +1,6 @@
 *.swp
 *.pyc
 .env/*
+.ipynb_checkpoints/
+*.DS_Store
+cs231n/datasets/.DS_Store
